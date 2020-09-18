@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<h1 th:text="${message}"></h1>
+    <table border="5">
+        <tr>
+            <th>№</th>
+            <th>name</th>
+            <th>series</th>
+            <th>age</th>
+        </tr>
+
+        <tr th:each="car, state : ${cars}">
+            <td th:utext="${state.count}">№</td>
+            <td th:utext="${car.name}">Car Name</td>
+            <td th:utext="${car.series}">Car Series</td>
+            <td th:utext="${car.age}">Car Age</td>
+        </tr>
+    </table>
+</body>
+</html>
