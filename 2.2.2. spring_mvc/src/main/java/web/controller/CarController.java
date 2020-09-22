@@ -14,7 +14,9 @@ import java.util.List;
 public class CarController {
 
     @GetMapping("/cars")
-    public String printCars(@RequestParam(name = "locale") String locale, ModelMap modelMap){
+    public String printCars(@RequestParam(name = "locale") String locale,
+                            @RequestParam(name = "count") int count,
+                            ModelMap modelMap) {
         String message = null;
 
         if (locale.equals("en")){
@@ -26,10 +28,22 @@ public class CarController {
 
         modelMap.addAttribute("message", message);
 
+        List<Car>startCarList = new ArrayList<>();
+        startCarList.add(new Car("car1",1,1));
+        startCarList.add(new Car("car2",2,2));
+        startCarList.add(new Car("car3",3,3));
+        startCarList.add(new Car("car4",4,4));
+        startCarList.add(new Car("car5",5,5));
+
         List<Car>carList = new ArrayList<>();
-        carList.add(new Car("car1",1,1));
-        carList.add(new Car("car2",2,2));
-        carList.add(new Car("car3",3,3));
+
+        if (count>5){
+            carList.addAll(startCarList);
+        }else {
+            for (int i = 0; i < count; i++) {
+                carList.add(startCarList.get(i));
+            }
+        }
         modelMap.addAttribute("cars",carList);
 
         return "cars";
